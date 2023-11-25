@@ -3,10 +3,10 @@ import { Op, where } from 'sequelize';
 import { IAuth, IUser, IUserModules, IUserPermission } from 'interfaces/Tables';;
 import AuthController from '../auth/index';
 import Admin from '../../../models/Admin';
-import ClientsController from '../clients';
+import ClientsController from '../commercialClients';
 import AdminPermission from '../../../models/AdminPermission';
 import Module from '../../../models/Module';
-import Client from '../../../models/Client';
+import Client from '../../../models/CommercialClient';
 import ClientsPermissions from '../../../models/ClientsPermissions';
 import UserModules from '../../../models/UserModule';
 

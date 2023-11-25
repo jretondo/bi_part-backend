@@ -48,7 +48,7 @@ export interface IActivity {
     activity_description: string
 }
 
-export interface IClients {
+export interface ICommercialClients {
     id?: number,
     document_type: number,
     document_number: string,
@@ -59,7 +59,35 @@ export interface IClients {
     direction: string,
     phone: string,
     city: string,
-    activity_description: number
+    activity_description: number,
+    is_legal_person: boolean,
+    team: string,
+    type: number,
+    observations: string
+}
+export interface IOperativeClients {
+    id?: number,
+    document_type: number,
+    document_number: string,
+    business_name: string,
+    fantasie_name: string,
+    email: string,
+    iva_condition_id: number,
+    direction: string,
+    phone: string,
+    city: string,
+    activity_description: number,
+    is_legal_person: boolean,
+    social_security: boolean,
+    balance: boolean,
+    observations: string,
+    client_check: boolean,
+    client_check_update: Date,
+    admin_check: number,
+    admin_check_update: Date,
+    user_id: number,
+    commercial_client_id: number,
+    is_mono: boolean,
 }
 
 export interface IIvaConditions {

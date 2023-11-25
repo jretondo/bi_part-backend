@@ -4,7 +4,7 @@ import { IUserPermission } from '../interfaces/Tables';
 import { DataTypes, Optional, Model } from 'sequelize';
 import sequelize from '../database';
 import Admin from './Admin';
-import Client from './Client';
+import CommercialClient from './CommercialClient';
 import ClientsPermissions from './ClientsPermissions';
 
 type UserPermissionCreationAttributes = Optional<IUserPermission, 'id'>;
@@ -63,16 +63,16 @@ AdminPermission.belongsTo(Admin, {
     targetKey: Columns.admin.id,
 })
 
-Client.hasMany(AdminPermission, {
+CommercialClient.hasMany(AdminPermission, {
     foreignKey: Columns.userPermissions.client_id,
-    sourceKey: Columns.clients.id,
+    sourceKey: Columns.commercialClients.id,
     onDelete: Restrictions.CASCADE,
     onUpdate: Restrictions.CASCADE
 })
 
-AdminPermission.belongsTo(Client, {
+AdminPermission.belongsTo(CommercialClient, {
     foreignKey: Columns.userPermissions.client_id,
-    targetKey: Columns.clients.id,
+    targetKey: Columns.commercialClients.id,
 })
 
 

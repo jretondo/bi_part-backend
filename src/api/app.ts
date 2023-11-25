@@ -17,7 +17,8 @@ import permissions from './components/modules/network';
 import user from './components/user/network';
 import routes from './components/routes/network';
 import activity from './components/activity/network';
-import clients from './components/clients/network';
+import commercialClients from './components/commercialClients/network';
+import operativeClients from './components/operativeClients/network';
 import certificates from './components/certificates/network';
 import views from './components/views/network';
 import { config } from '../config';
@@ -55,7 +56,8 @@ export class App {
         this.app.use("/api/routes", routes)
         this.app.use("/api/activity", activity)
         this.app.use("/api/views", views)
-        this.app.use("/api/clients", clients)
+        this.app.use("/api/commercialClients", commercialClients)
+        this.app.use("/api/operativeClients", operativeClients)
         this.app.use("/api/certificates", certificates)
         this.app.use(errorThrow);
     }

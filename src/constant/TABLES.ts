@@ -48,7 +48,7 @@ enum Activity {
     activity_description = "activity_description"
 }
 
-enum Clients {
+enum OperativeClients {
     id = "id",
     document_type = "document_type",
     document_number = "document_number",
@@ -56,7 +56,41 @@ enum Clients {
     fantasie_name = "fantasie_name",
     email = "email",
     iva_condition_id = "iva_condition_id",
-    direction = "direction"
+    direction = "direction",
+    phone = "phone",
+    city = "city",
+    activity_description = "activity_description",
+    team = "team",
+    is_legal_person = "is_legal_person",
+    social_security = "social_security",
+    type = "type",
+    observations = "observations",
+    commercial_client_id = "commercial_client_id",
+    user_id = "user_id",
+    client_check = "client_check",
+    client_check_update = "client_check_update",
+    admin_check = "admin_check",
+    admin_check_update = "admin_check_update"
+}
+
+enum CommercialClients {
+    id = "id",
+    document_type = "document_type",
+    document_number = "document_number",
+    business_name = "business_name",
+    fantasie_name = "fantasie_name",
+    email = "email",
+    iva_condition_id = "iva_condition_id",
+    direction = "direction",
+    phone = "phone",
+    city = "city",
+    activity_description = "activity_description",
+    is_legal_person = "is_legal_person",
+    social_security = "social_security",
+    type = "type",
+    balance = "balance",
+    observations = "observations",
+    commercial_client_id = "commercial_client_id"
 }
 
 enum IvaConditions {
@@ -99,7 +133,8 @@ export enum Tables {
     USER_PERMISSIONS = "admin_permissions",
     MODULES = "modules",
     ACTIVITY = "activities",
-    CLIENTS = "clients",
+    COMMERCIAL_CLIENTS = "commercial_clients",
+    OPERATIVE_CLIENTS = "operative_clients",
     IVA_CONDITIONS = "iva_conditions",
     INVOICE_TYPES = "invoice_types",
     IVA_TYPES = "iva_types",
@@ -115,7 +150,8 @@ export const Columns = {
     userPermissions: UserPermissionCol,
     modules: Modules,
     activity: Activity,
-    clients: Clients,
+    operativeClients: OperativeClients,
+    commercialClients: CommercialClients,
     ivaConditions: IvaConditions,
     invoiceTypes: InvoiceTypes,
     ivaTypes: IvaTypes,

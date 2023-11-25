@@ -4,17 +4,18 @@ import ejs from 'ejs';
 import { Op } from 'sequelize';
 import JsReport from 'jsreport-core';
 import { promisify } from 'util';
-import { IClients } from './../../../interfaces/Tables';
-import Client from '../../../models/Client';
+import { IOperativeClients } from '../../../interfaces/Tables';
+import Client from '../../../models/OperativeClient';
 import IvaCondition from '../../../models/IvaCondition';
 import AfipCrt from '../../../models/AfipCrt';
 import { AfipClass } from '../../../utils/classes/AfipClass';
 import { base64Encode } from '../../../utils/functions/base64Encode';
 import moment from 'moment';
-import AdminPermission from '../../../models/AdminPermission';
+import CommercialClient from '../../../models/CommercialClient';
+import Admin from '../../../models/Admin';
 
 export = () => {
-    const upsert = async (client: IClients) => {
+    const upsert = async (client: IOperativeClients) => {
         if (client.id) {
             return await Client.update(client, { where: { id: client.id } })
         } else {
@@ -35,20 +36,11 @@ export = () => {
                     { email: { [Op.substring]: text } }
                 ]
             },
-            include: [IvaCondition,
-                {
-                    model: AdminPermission,
-                    where: {
-                        [Op.and]: [
-                            { permission_grade: { [Op.gte]: 1 } },
-                            { user_id: userId },
-                            { client_enabled: true }
-                        ]
-                    }
-                }],
+            include: [CommercialClient, IvaCondition, Admin],
             offset: offset,
             limit: ITEMS_PER_PAGE
         });
+
         return {
             totalItems: count,
             itemsPerPage: ITEMS_PER_PAGE,
@@ -73,7 +65,6 @@ export = () => {
 
     const getTaxProof = async (documentNumber: number, isMono: boolean) => {
         const clientDataTax = await getClientDataTax(documentNumber)
-        console.log('clientDataTax :>> ', clientDataTax);
         let layoutUrl = ""
         isMono ? layoutUrl = path.join("views", "reports", "clientTaxData", "mono.ejs") : layoutUrl = path.join("views", "reports", "clientTaxData", "general.ejs");
         const myCss = fs.readFileSync(path.join("public", "css", "bootstrap.min.css"), 'utf8')

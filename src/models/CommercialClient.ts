@@ -1,15 +1,15 @@
 import { Tables, Columns } from '../constant/TABLES';
 import { Restrictions } from '../constant/OTHERS';
-import { IClients } from '../interfaces/Tables';
+import { ICommercialClients } from '../interfaces/Tables';
 import { DataTypes, Model, Optional } from 'sequelize';
 import sequelize from '../database';
 import IvaCondition from './IvaCondition';
 
-type ClientCreationAttributes = Optional<IClients, 'id'>;
+type CommercialClientCreationAttributes = Optional<ICommercialClients, 'id'>;
 
-class Client extends Model<IClients, ClientCreationAttributes> { }
+class CommercialClient extends Model<ICommercialClients, CommercialClientCreationAttributes> { }
 
-Client.init({
+CommercialClient.init({
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -39,34 +39,47 @@ Client.init({
     phone: {
         type: DataTypes.STRING
     },
+    city: {
+        type: DataTypes.STRING
+    },
     activity_description: {
         type: DataTypes.STRING
     },
-    city: {
+    is_legal_person: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
+    },
+    team: {
         type: DataTypes.STRING
+    },
+    type: {
+        type: DataTypes.INTEGER
+    },
+    observations: {
+        type: DataTypes.TEXT("long")
     }
 
 }, {
     sequelize,
-    tableName: Tables.CLIENTS,
+    tableName: Tables.COMMERCIAL_CLIENTS,
     timestamps: true,
     indexes: [
-        { fields: [Columns.clients.document_number], name: 'UQ_clients_documentNumber', unique: true }
+        { fields: [Columns.commercialClients.document_number], name: 'UQ_clients_documentNumber', unique: true }
     ]
 })
 
-IvaCondition.hasMany(Client, {
-    foreignKey: Columns.clients.iva_condition_id,
+IvaCondition.hasMany(CommercialClient, {
+    foreignKey: Columns.commercialClients.iva_condition_id,
     sourceKey: Columns.ivaConditions.id,
     onDelete: Restrictions.CASCADE,
     onUpdate: Restrictions.CASCADE
 })
 
-Client.belongsTo(IvaCondition, {
-    foreignKey: Columns.clients.iva_condition_id,
+CommercialClient.belongsTo(IvaCondition, {
+    foreignKey: Columns.commercialClients.iva_condition_id,
     targetKey: Columns.ivaConditions.id
 })
 
 
 
-export = Client
+export = CommercialClient
