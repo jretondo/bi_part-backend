@@ -88,6 +88,7 @@ export interface IOperativeClients {
     user_id: number,
     commercial_client_id: number,
     is_mono: boolean,
+    verification_code: string,
 }
 
 export interface IIvaConditions {

@@ -86,6 +86,11 @@ OperativeClient.init({
     },
     is_mono: {
         type: DataTypes.BOOLEAN
+    },
+    verification_code: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        defaultValue: null
     }
 }, {
     sequelize,

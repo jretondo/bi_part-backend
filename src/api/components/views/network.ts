@@ -1,6 +1,10 @@
 import { Router, NextFunction, Response, Request } from 'express';
 import fs from 'fs';
 import path from 'path';
+import Colors from '../../../data/Colors.json';
+import Links from '../../../data/Links.json';
+import Names from '../../../data/Names.json';
+import { IEmailSendPass } from '../../../interfaces/Others';
 
 const router = Router();
 
@@ -88,9 +92,44 @@ const clientDataTaxMono = (
     res.render('reports/clientTaxData/mono.ejs', datos2);
 }
 
+const userConfirmation = (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+
+    const data = {
+        Colors,
+        Links,
+        Names,
+        redirectButton: "Ingresar al sistema",
+        textButton: "Confirmar Cliente",
+        clientName: "Cliente de Prueba",
+    };
+    res.render('emails/Templates/userConfirmation.ejs', data);
+}
+
+const clientConfirmated = (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+
+    const data = {
+        Colors,
+        Links,
+        Names,
+        clientName: "Cliente de Prueba",
+        userName: "Usuario de Prueba"
+    };
+    res.render('emails/Templates/clientConfirmated.ejs', data);
+}
+
 router
     .get("/payment", newAdvance)
     .get("/clientDataTaxGeneral", clientDataTax)
     .get("/clientDataTaxMono", clientDataTaxMono)
+    .get("/userConfirmation", userConfirmation)
+    .get("/clientConfirmated", clientConfirmated)
 
 export = router;
