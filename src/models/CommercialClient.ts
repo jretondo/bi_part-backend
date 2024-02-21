@@ -49,12 +49,6 @@ CommercialClient.init({
         type: DataTypes.BOOLEAN,
         defaultValue: false
     },
-    team: {
-        type: DataTypes.STRING
-    },
-    type: {
-        type: DataTypes.INTEGER
-    },
     observations: {
         type: DataTypes.TEXT("long")
     }

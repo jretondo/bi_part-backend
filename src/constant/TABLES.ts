@@ -50,6 +50,7 @@ enum Activity {
 
 enum OperativeClients {
     id = "id",
+    born_date = "born_date",
     document_type = "document_type",
     document_number = "document_number",
     business_name = "business_name",
@@ -60,17 +61,26 @@ enum OperativeClients {
     phone = "phone",
     city = "city",
     activity_description = "activity_description",
-    team = "team",
     is_legal_person = "is_legal_person",
-    social_security = "social_security",
-    type = "type",
-    observations = "observations",
-    commercial_client_id = "commercial_client_id",
+    is_mono = "is_mono",
     user_id = "user_id",
+    observations = "observations",
+    team_id = "team_id",
+    client_type_id = "client_type_id",
+    gross_income_id = "gross_income_id",
+    service_id = "service_id",
+    social_security = "social_security",
+    social_security_rank = "social_security_rank",
+    domestic_service = "domestic_service",
+    domestic_service_rank = "domestic_service_rank",
+    vat_rank = "vat_rank",
+    balance = "balance",
+    commercial_client_id = "commercial_client_id",
     client_check = "client_check",
     client_check_update = "client_check_update",
     admin_check = "admin_check",
-    admin_check_update = "admin_check_update"
+    admin_check_update = "admin_check_update",
+    verification_code = "verification_code"
 }
 
 enum CommercialClients {
@@ -86,11 +96,7 @@ enum CommercialClients {
     city = "city",
     activity_description = "activity_description",
     is_legal_person = "is_legal_person",
-    social_security = "social_security",
-    type = "type",
-    balance = "balance",
     observations = "observations",
-    commercial_client_id = "commercial_client_id"
 }
 
 enum IvaConditions {
@@ -127,6 +133,42 @@ enum AfipCrt {
     enabled = "enabled"
 }
 
+enum Teams {
+    id = "id",
+    name = "name",
+    description = "description"
+}
+
+enum MonotributoTypes {
+    id = "id",
+    name = "name",
+    description = "description"
+}
+
+enum ClientTypes {
+    id = "id",
+    name = "name",
+    description = "description"
+}
+
+enum GrossIncome {
+    id = "id",
+    name = "name",
+    percentage = "percentage"
+}
+
+enum Services {
+    id = "id",
+    name = "name",
+    description = "description"
+}
+
+enum VatRanking {
+    id = "id",
+    digit = "digit",
+    rank = "rank"
+}
+
 export enum Tables {
     ADMIN = "admins",
     AUTH_ADMIN = "auth_admin",
@@ -141,7 +183,14 @@ export enum Tables {
     PARAMETERS = "parameters",
     AFIP_CRT = "afip_crt",
     CLIENTS_PERMISSIONS = "clients_permissions",
-    USER_MODULES = "user_modules"
+    USER_MODULES = "user_modules",
+    TEAMS = "teams",
+    CLIENT_TYPES = "client_types",
+    GROSS_INCOME = "gross_income",
+    SERVICES = "services",
+    MONOTRIBUTO_TYPES = "monotributo_types",
+    VAT_RANKING = "vat_ranking",
+    SOCIAL_SECURITY = "social_security"
 }
 
 export const Columns = {
@@ -158,5 +207,11 @@ export const Columns = {
     parameters: Parameters,
     afipCrt: AfipCrt,
     clientsPermissions: ClientsPermissions,
-    userModules: UserModules
+    userModules: UserModules,
+    teams: Teams,
+    clientTypes: ClientTypes,
+    grossIncome: GrossIncome,
+    services: Services,
+    monotributoTypes: MonotributoTypes,
+    vatRanking: VatRanking
 }

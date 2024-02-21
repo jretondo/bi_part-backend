@@ -61,12 +61,11 @@ export interface ICommercialClients {
     city: string,
     activity_description: number,
     is_legal_person: boolean,
-    team: string,
-    type: number,
     observations: string
 }
 export interface IOperativeClients {
     id?: number,
+    born_date: Date,
     document_type: number,
     document_number: string,
     business_name: string,
@@ -77,18 +76,30 @@ export interface IOperativeClients {
     phone: string,
     city: string,
     activity_description: number,
-    is_legal_person: boolean,
-    social_security: boolean,
-    balance: boolean,
+    is_legal_person: boolean, //true ==> legal person, false ==> physical person
+    is_mono: boolean,
+    user_id: number, //user who created the client
     observations: string,
+
+    team_id: number,
+    client_type_id: number,
+    gross_income_id: number,
+    service_id: number,
+
+    social_security: number | null, //931
+    social_security_rank: number | null, //931
+    domestic_service: number | null,
+    domestic_service_rank: number | null,
+    vat_rank: number | null,
+
+    balance: boolean,
+
+    commercial_client_id: number, //user who is the operative responsible
     client_check: boolean,
     client_check_update: Date,
     admin_check: number,
     admin_check_update: Date,
-    user_id: number,
-    commercial_client_id: number,
-    is_mono: boolean,
-    verification_code: string,
+    verification_code: string
 }
 
 export interface IIvaConditions {
@@ -122,4 +133,52 @@ export interface IAfipCrt {
     key_file?: string,
     enabled?: boolean,
     crt_name: string
+}
+
+export interface ITeam {
+    id?: number,
+    name: string,
+    description: string
+}
+
+export interface IGrossIncome {
+    id?: number,
+    name: string,
+    description: string
+}
+
+export interface IMonotributoTypes {
+    id?: number,
+    name: string,
+    description: string
+}
+
+export interface IVatRanking {
+    id?: number,
+    digit: number,
+    rank: number
+}
+
+export interface ISocialSecurity {
+    id?: number,
+    digit: number,
+    rank: number
+}
+
+export interface IService {
+    id?: number,
+    name: string,
+    description: string
+}
+
+export interface IGrossIncome {
+    id?: number,
+    name: string,
+    description: string
+}
+
+export interface IClientType {
+    id?: number,
+    name: string,
+    description: string
 }

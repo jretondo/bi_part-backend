@@ -21,6 +21,12 @@ import commercialClients from './components/commercialClients/network';
 import operativeClients from './components/operativeClients/network';
 import certificates from './components/certificates/network';
 import views from './components/views/network';
+import team from './components/team/network';
+import monotributoType from './components/monotributoType/network';
+import vatRanking from './components/vatRanking/network';
+import socialSecurity from './components/socialSecurity/network';
+import grossIncome from './components/grossIncome/network';
+
 import { config } from '../config';
 export class App {
     app: Application;
@@ -59,12 +65,17 @@ export class App {
         this.app.use("/api/commercialClients", commercialClients)
         this.app.use("/api/operativeClients", operativeClients)
         this.app.use("/api/certificates", certificates)
+        this.app.use("/api/team", team)
+        this.app.use("/api/monotributoType", monotributoType)
+        this.app.use("/api/vatRanking", vatRanking)
+        this.app.use("/api/socialSecurity", socialSecurity)
+        this.app.use("/api/grossIncome", grossIncome)
         this.app.use(errorThrow);
     }
 
     listenTest(): void {
         this.app.listen(this.app.get('port'));
-        console.log(`Conectado al puerto ${this.app.get('port')}`)
+        console.log(`Connected in port ${this.app.get('port')}`)
     }
 
     listenProd(): void {
@@ -73,7 +84,7 @@ export class App {
             cert: fs.readFileSync(path.join(__dirname, "..", "..", "..", "..", "..", config.ssl.crt), 'utf8')
         };
         https.createServer(options, this.app).listen(this.app.get('port'), () => {
-            console.log(`Conectado al puerto ${this.app.get('port')}`)
+            console.log(`Connected in port ${this.app.get('port')}`)
         });
     }
 }

@@ -14,88 +14,140 @@ class OperativeClient extends Model<IOperativeClients, OperativeClientCreationAt
 OperativeClient.init({
     id: {
         type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
+        autoIncrement: true,
+        primaryKey: true
+    },
+    born_date: {
+        type: DataTypes.DATE,
+        allowNull: false
     },
     document_type: {
-        type: DataTypes.INTEGER
+        type: DataTypes.INTEGER,
+        allowNull: false
     },
     document_number: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING(20),
+        allowNull: false
     },
     business_name: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING(100),
+        allowNull: false
     },
     fantasie_name: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING(100),
+        allowNull: false
     },
     email: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING(100),
+        allowNull: false
     },
     iva_condition_id: {
-        type: DataTypes.INTEGER
+        type: DataTypes.INTEGER,
+        allowNull: false
     },
     direction: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING(100),
+        allowNull: false
     },
     phone: {
-        type: DataTypes.STRING
-    },
-    activity_description: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING(100),
+        allowNull: false
     },
     city: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING(100),
+        allowNull: false
+    },
+    activity_description: {
+        type: DataTypes.INTEGER,
+        allowNull: false
     },
     is_legal_person: {
         type: DataTypes.BOOLEAN,
-        defaultValue: false
+        allowNull: false
     },
-    social_security: {
-        type: DataTypes.BOOLEAN
+    team_id: {
+        type: DataTypes.STRING(100),
+        allowNull: false
+    },
+    client_type_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false
     },
     observations: {
-        type: DataTypes.TEXT("long")
-    },
-    commercial_client_id: {
-        type: DataTypes.INTEGER
+        type: DataTypes.STRING(100),
+        allowNull: false
     },
     user_id: {
-        type: DataTypes.INTEGER
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    is_mono: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false
+    },
+    gross_income_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    service_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    social_security: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    social_security_rank: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    domestic_service: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    domestic_service_rank: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    vat_rank: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
+    balance: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false
+    },
+    commercial_client_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false
     },
     client_check: {
         type: DataTypes.BOOLEAN,
-        defaultValue: false
+        allowNull: false
     },
     client_check_update: {
         type: DataTypes.DATE,
-        allowNull: true,
-        defaultValue: null
+        allowNull: false
     },
     admin_check: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false
+        type: DataTypes.INTEGER,
+        allowNull: false
     },
     admin_check_update: {
         type: DataTypes.DATE,
-        allowNull: true,
-        defaultValue: null
-    },
-    balance: {
-        type: DataTypes.BOOLEAN
-    },
-    is_mono: {
-        type: DataTypes.BOOLEAN
+        allowNull: false
     },
     verification_code: {
-        type: DataTypes.STRING,
-        allowNull: true,
-        defaultValue: null
+        type: DataTypes.STRING(100),
+        allowNull: false
     }
 }, {
     sequelize,
     tableName: Tables.OPERATIVE_CLIENTS,
-    timestamps: true
+    timestamps: true,
+    indexes: [
+        { fields: [Columns.operativeClients.document_number], name: 'UQ_clients_documentNumber', unique: true }
+    ]
 })
 
 IvaCondition.hasMany(OperativeClient, {
