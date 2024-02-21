@@ -26,6 +26,7 @@ import monotributoType from './components/monotributoType/network';
 import vatRanking from './components/vatRanking/network';
 import socialSecurity from './components/socialSecurity/network';
 import grossIncome from './components/grossIncome/network';
+import serviceType from './components/serviceType/network';
 
 import { config } from '../config';
 export class App {
@@ -70,6 +71,7 @@ export class App {
         this.app.use("/api/vatRanking", vatRanking)
         this.app.use("/api/socialSecurity", socialSecurity)
         this.app.use("/api/grossIncome", grossIncome)
+        this.app.use("/api/serviceType", serviceType)
         this.app.use(errorThrow);
     }
 

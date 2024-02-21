@@ -157,7 +157,7 @@ enum GrossIncome {
     percentage = "percentage"
 }
 
-enum Services {
+enum ServiceType {
     id = "id",
     name = "name",
     description = "description"
@@ -187,10 +187,10 @@ export enum Tables {
     TEAMS = "teams",
     CLIENT_TYPES = "client_types",
     GROSS_INCOME = "gross_income",
-    SERVICES = "services",
     MONOTRIBUTO_TYPES = "monotributo_types",
     VAT_RANKING = "vat_ranking",
-    SOCIAL_SECURITY = "social_security"
+    SOCIAL_SECURITY = "social_security",
+    SERVICE_TYPE = "service_type",
 }
 
 export const Columns = {
@@ -211,7 +211,7 @@ export const Columns = {
     teams: Teams,
     clientTypes: ClientTypes,
     grossIncome: GrossIncome,
-    services: Services,
+    serviceType: ServiceType,
     monotributoTypes: MonotributoTypes,
     vatRanking: VatRanking
 }

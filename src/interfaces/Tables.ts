@@ -147,6 +147,12 @@ export interface IGrossIncome {
     description: string
 }
 
+export interface IServiceType {
+    id?: number,
+    name: string,
+    description: string
+}
+
 export interface IMonotributoTypes {
     id?: number,
     name: string,
