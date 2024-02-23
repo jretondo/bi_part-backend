@@ -27,6 +27,7 @@ import vatRanking from './components/vatRanking/network';
 import socialSecurity from './components/socialSecurity/network';
 import grossIncome from './components/grossIncome/network';
 import serviceType from './components/serviceType/network';
+import clientType from './components/clientType/network';
 
 import { config } from '../config';
 export class App {
@@ -72,6 +73,7 @@ export class App {
         this.app.use("/api/socialSecurity", socialSecurity)
         this.app.use("/api/grossIncome", grossIncome)
         this.app.use("/api/serviceType", serviceType)
+        this.app.use("/api/clientType", clientType)
         this.app.use(errorThrow);
     }
 

@@ -64,8 +64,8 @@ export interface ICommercialClients {
     observations: string
 }
 export interface IOperativeClients {
+    commercial_client_id: number, //user who is the operative responsible
     id?: number,
-    born_date: Date,
     document_type: number,
     document_number: string,
     business_name: string,
@@ -75,31 +75,33 @@ export interface IOperativeClients {
     direction: string,
     phone: string,
     city: string,
-    activity_description: number,
-    is_legal_person: boolean, //true ==> legal person, false ==> physical person
-    is_mono: boolean,
-    user_id: number, //user who created the client
-    observations: string,
 
-    team_id: number,
+    is_legal_person: boolean, //true ==> legal person, false ==> physical person
+    born_date: Date,
     client_type_id: number,
-    gross_income_id: number,
-    service_id: number,
+
+    activity_description: number,
+    monotributo_type_id: number,
+    balance: boolean,
+    physical_person: boolean,
 
     social_security: number | null, //931
-    social_security_rank: number | null, //931
-    domestic_service: number | null,
-    domestic_service_rank: number | null,
+    social_security_rank: number | null, //931    
+    gross_income_id: number,
     vat_rank: number | null,
 
-    balance: boolean,
+    domestic_service: number | null,
+    service_type_id: number,
 
-    commercial_client_id: number, //user who is the operative responsible
+    user_id: number, //user who created the client
+    team_id: number,
+    observations: string,
+
     client_check: boolean,
-    client_check_update: Date,
+    client_check_update: Date | null,
     admin_check: number,
-    admin_check_update: Date,
-    verification_code: string
+    admin_check_update: Date | null,
+    verification_code: string,
 }
 
 export interface IIvaConditions {

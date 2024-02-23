@@ -6,20 +6,24 @@ import sequelize from '../database';
 import IvaCondition from './IvaCondition';
 import CommercialClient from './CommercialClient';
 import Admin from './Admin';
+import GrossIncome from './GrossIncome';
+import MonotributoTypes from './MonotributoTypes';
+import ServiceType from './ServiceType';
+import Team from './Team';
 
 type OperativeClientCreationAttributes = Optional<IOperativeClients, 'id'>;
 
 class OperativeClient extends Model<IOperativeClients, OperativeClientCreationAttributes> { }
 
 OperativeClient.init({
+    commercial_client_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
     id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true
-    },
-    born_date: {
-        type: DataTypes.DATE,
-        allowNull: false
     },
     document_type: {
         type: DataTypes.INTEGER,
@@ -65,81 +69,83 @@ OperativeClient.init({
         type: DataTypes.BOOLEAN,
         allowNull: false
     },
-    team_id: {
-        type: DataTypes.STRING(100),
+    born_date: {
+        type: DataTypes.DATE,
         allowNull: false
     },
     client_type_id: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: true
     },
-    observations: {
-        type: DataTypes.STRING(100),
-        allowNull: false
-    },
-    user_id: {
+    monotributo_type_id: {
         type: DataTypes.INTEGER,
-        allowNull: false
-    },
-    is_mono: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false
-    },
-    gross_income_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-    },
-    service_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-    },
-    social_security: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-    },
-    social_security_rank: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-    },
-    domestic_service: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-    },
-    domestic_service_rank: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-    },
-    vat_rank: {
-        type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: true
     },
     balance: {
         type: DataTypes.BOOLEAN,
         allowNull: false
     },
-    commercial_client_id: {
+    physical_person: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false
+    },
+    social_security: {
         type: DataTypes.INTEGER,
+        allowNull: true
+    },
+    social_security_rank: {
+        type: DataTypes.INTEGER,
+        allowNull: true
+    },
+    gross_income_id: {
+        type: DataTypes.INTEGER,
+        allowNull: true
+    },
+    vat_rank: {
+        type: DataTypes.INTEGER,
+        allowNull: true
+    },
+    domestic_service: {
+        type: DataTypes.INTEGER,
+        allowNull: true
+    },
+    service_type_id: {
+        type: DataTypes.INTEGER,
+        allowNull: true
+    },
+    user_id: {
+        type: DataTypes.INTEGER,
+        allowNull: true
+    },
+    team_id: {
+        type: DataTypes.INTEGER,
+        allowNull: true
+    },
+    observations: {
+        type: DataTypes.STRING(255),
         allowNull: false
     },
     client_check: {
         type: DataTypes.BOOLEAN,
-        allowNull: false
+        allowNull: false,
+        defaultValue: false
     },
     client_check_update: {
         type: DataTypes.DATE,
-        allowNull: false
+        allowNull: true
     },
     admin_check: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        defaultValue: false
     },
     admin_check_update: {
         type: DataTypes.DATE,
-        allowNull: false
+        allowNull: true
     },
     verification_code: {
         type: DataTypes.STRING(100),
-        allowNull: false
+        allowNull: true
     }
 }, {
     sequelize,
@@ -186,4 +192,51 @@ OperativeClient.belongsTo(Admin, {
     targetKey: Columns.operativeClients.id
 })
 
+GrossIncome.hasMany(OperativeClient, {
+    foreignKey: Columns.operativeClients.gross_income_id,
+    sourceKey: Columns.grossIncome.id,
+    onDelete: Restrictions.SET_NULL,
+    onUpdate: Restrictions.SET_NULL
+})
+
+OperativeClient.belongsTo(GrossIncome, {
+    foreignKey: Columns.operativeClients.gross_income_id,
+    targetKey: Columns.grossIncome.id
+})
+
+MonotributoTypes.hasMany(OperativeClient, {
+    foreignKey: Columns.operativeClients.monotributo_type_id,
+    sourceKey: Columns.monotributoTypes.id,
+    onDelete: Restrictions.SET_NULL,
+    onUpdate: Restrictions.SET_NULL
+})
+
+OperativeClient.belongsTo(MonotributoTypes, {
+    foreignKey: Columns.operativeClients.monotributo_type_id,
+    targetKey: Columns.monotributoTypes.id
+})
+
+ServiceType.hasMany(OperativeClient, {
+    foreignKey: Columns.operativeClients.service_type_id,
+    sourceKey: Columns.serviceType.id,
+    onDelete: Restrictions.SET_NULL,
+    onUpdate: Restrictions.SET_NULL
+})
+
+OperativeClient.belongsTo(ServiceType, {
+    foreignKey: Columns.operativeClients.service_type_id,
+    targetKey: Columns.serviceType.id
+})
+
+Team.hasMany(OperativeClient, {
+    foreignKey: Columns.operativeClients.team_id,
+    sourceKey: Columns.teams.id,
+    onDelete: Restrictions.SET_NULL,
+    onUpdate: Restrictions.SET_NULL
+})
+
+OperativeClient.belongsTo(Team, {
+    foreignKey: Columns.operativeClients.team_id,
+    targetKey: Columns.teams.id
+})
 export = OperativeClient

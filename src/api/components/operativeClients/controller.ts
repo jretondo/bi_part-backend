@@ -34,7 +34,15 @@ export = () => {
             }
             return await Client.update(client, { where: { id: client.id } })
         } else {
-            const newClient = await Client.create(client)
+            const newClientBody = {
+                ...client,
+                client_check: false,
+                client_check_update: null,
+                admin_check: 0,
+                admin_check_update: null,
+                verification_code: ""
+            }
+            const newClient = await Client.create(newClientBody)
             const userData = await Admin.findOne({ where: { id: client.user_id } })
             if (client.user_id) {
                 const uniqueCode = (Math.floor(Math.random() * 1000000)).toString()
