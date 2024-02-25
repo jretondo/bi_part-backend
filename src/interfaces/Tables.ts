@@ -80,7 +80,7 @@ export interface IOperativeClients {
     born_date: Date,
     client_type_id: number,
 
-    activity_description: number,
+    activity_description: string,
     monotributo_type_id: number,
     balance: boolean,
     physical_person: boolean,

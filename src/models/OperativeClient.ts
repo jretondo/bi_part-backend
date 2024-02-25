@@ -10,6 +10,7 @@ import GrossIncome from './GrossIncome';
 import MonotributoTypes from './MonotributoTypes';
 import ServiceType from './ServiceType';
 import Team from './Team';
+import ClientType from './ClientType';
 
 type OperativeClientCreationAttributes = Optional<IOperativeClients, 'id'>;
 
@@ -62,7 +63,7 @@ OperativeClient.init({
         allowNull: false
     },
     activity_description: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false
     },
     is_legal_person: {
@@ -70,7 +71,7 @@ OperativeClient.init({
         allowNull: false
     },
     born_date: {
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
         allowNull: false
     },
     client_type_id: {
@@ -79,7 +80,8 @@ OperativeClient.init({
     },
     monotributo_type_id: {
         type: DataTypes.INTEGER,
-        allowNull: true
+        allowNull: true,
+        defaultValue: null
     },
     balance: {
         type: DataTypes.BOOLEAN,
@@ -239,4 +241,17 @@ OperativeClient.belongsTo(Team, {
     foreignKey: Columns.operativeClients.team_id,
     targetKey: Columns.teams.id
 })
+
+ClientType.hasMany(OperativeClient, {
+    foreignKey: Columns.operativeClients.client_type_id,
+    sourceKey: Columns.clientTypes.id,
+    onDelete: Restrictions.SET_NULL,
+    onUpdate: Restrictions.SET_NULL
+})
+
+OperativeClient.belongsTo(ClientType, {
+    foreignKey: Columns.operativeClients.client_type_id,
+    targetKey: Columns.clientTypes.id
+})
+
 export = OperativeClient

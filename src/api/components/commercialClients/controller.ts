@@ -13,6 +13,11 @@ import { base64Encode } from '../../../utils/functions/base64Encode';
 import moment from 'moment';
 import OperativeClient from '../../../models/OperativeClient';
 import Admin from '../../../models/Admin';
+import GrossIncome from '../../../models/GrossIncome';
+import MonotributoTypes from '../../../models/MonotributoTypes';
+import ServiceType from '../../../models/ServiceType';
+import Team from '../../../models/Team';
+import ClientType from '../../../models/ClientType';
 
 export = () => {
     const upsert = async (commercialClient: ICommercialClients) => {
@@ -38,7 +43,7 @@ export = () => {
             },
             include: [{
                 model: OperativeClient,
-                include: [IvaCondition, Admin],
+                include: [IvaCondition, Admin, GrossIncome, MonotributoTypes, ServiceType, Team, ClientType],
                 required: false
             }, IvaCondition],
             offset: offset,

@@ -32,6 +32,7 @@ export = () => {
                 await confirmClient(`${userData?.dataValues.name} ${userData?.dataValues.lastname}` || "", client.business_name || "", "jretondo90@gmail.com", "Confirmación de cliente", link)
                 client.verification_code = uniqueCode
             }
+
             return await Client.update(client, { where: { id: client.id } })
         } else {
             const newClientBody = {
@@ -42,6 +43,7 @@ export = () => {
                 admin_check_update: null,
                 verification_code: ""
             }
+            console.log('newClientBody :>> ', newClientBody);
             const newClient = await Client.create(newClientBody)
             const userData = await Admin.findOne({ where: { id: client.user_id } })
             if (client.user_id) {
