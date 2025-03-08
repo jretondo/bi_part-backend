@@ -26,10 +26,11 @@ RUN npm install -g typescript pm2
 
 RUN npm install
 
+RUN npm run build
 # Establecer Puppeteer para usar Chromium de la instalación del sistema
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
     PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser \
     TZ=America/Argentina/Buenos_Aires
     
 # Comando por defecto para el contenedor
-CMD ["npm", "run", "start"]
+CMD ["pm2-runtime", "start", "dist/api/ecosystem.config.js"]
