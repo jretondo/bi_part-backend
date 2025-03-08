@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  bi-part-app-prod:
+    build:
+      context: .
+      dockerfile: dockerfile
+    working_dir: /app
+    volumes:
+      - /etc/letsencrypt/live/nekoadmin.com.ar-0001/fullchain.pem:/etc/letsencrypt/live/nekoadmin.com.ar-0001/fullchain.pem:ro
+      - /etc/letsencrypt/live/nekoadmin.com.ar-0001/privkey.pem:/etc/letsencrypt/live/nekoadmin.com.ar-0001/privkey.pem:ro
+      - ./public:/app/public
+      - ./views:/app/views
+      - ./src:/app/src
+      - ./tsconfig.json:/app/tsconfig.json
+      - ./:/app
+      - /app/node_modules
+      - ./public:/app/public
+    ports:
+      - '3021:3021'
+    env_file:
+      - .env

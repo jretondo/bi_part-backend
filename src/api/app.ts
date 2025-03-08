@@ -28,6 +28,8 @@ import socialSecurity from './components/socialSecurity/network';
 import grossIncome from './components/grossIncome/network';
 import serviceType from './components/serviceType/network';
 import clientType from './components/clientType/network';
+import productPyme from './components/productPyme/network';
+import division from './components/division/network';
 
 import { config } from '../config';
 export class App {
@@ -74,6 +76,8 @@ export class App {
         this.app.use("/api/grossIncome", grossIncome)
         this.app.use("/api/serviceType", serviceType)
         this.app.use("/api/clientType", clientType)
+        this.app.use("/api/productPyme", productPyme)
+        this.app.use("/api/division", division)
         this.app.use(errorThrow);
     }
 

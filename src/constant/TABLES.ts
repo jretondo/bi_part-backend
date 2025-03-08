@@ -64,22 +64,20 @@ enum OperativeClients {
     born_date = "born_date",
     client_type_id = "client_type_id",
     activity_description = "activity_description",
-    monotributo_type_id = "monotributo_type_id",
-    balance = "balance",
-    social_security = "social_security",
-    social_security_rank = "social_security_rank",
-    gross_income_id = "gross_income_id",
-    vat_rank = "vat_rank",
-    domestic_service = "domestic_service",
-    service_type_id = "service_type_id",
-    user_id = "user_id",
-    team_id = "team_id",
     observations = "observations",
-    client_check = "client_check",
-    client_check_update = "client_check_update",
-    admin_check = "admin_check",
-    admin_check_update = "admin_check_update",
-    verification_code = "verification_code"
+    product_pyme_id = "product_pyme_id",
+    team_id = "team_id",
+    division_id = "division_id",
+    balance = "balance",
+    balance_close = "balance_close",
+    cupon = "cupon",
+    invoice = "invoice",
+    system = "system",
+    sociality = "sociality",
+    team_balance_id = "team_balance_id",
+    physical_person = "physical_person",
+    risk = "risk",
+    team_risk_id = "team_risk_id",
 }
 
 enum CommercialClients {
@@ -168,6 +166,19 @@ enum VatRanking {
     rank = "rank"
 }
 
+enum ProductPyme {
+    id = "id",
+    name = "name",
+    gross_income_id = "gross_income_id",
+    monotributo_type_id = "monotributo_type_id",
+    service_type_id = "service_type_id",
+    social_security = "social_security",
+    domestic_service = "domestic_service",
+    operative_taxes_user_id = "operative_taxes_user_id",
+    operative_domestic_user_id = "operative_domestic_user_id",
+    operative_onboard_user_id = "operative_onboard_user_id"
+}
+
 export enum Tables {
     ADMIN = "admins",
     AUTH_ADMIN = "auth_admin",
@@ -184,12 +195,14 @@ export enum Tables {
     CLIENTS_PERMISSIONS = "clients_permissions",
     USER_MODULES = "user_modules",
     TEAMS = "teams",
+    DIVISIONS = "divisions",
     CLIENT_TYPES = "client_types",
     GROSS_INCOME = "gross_income",
     MONOTRIBUTO_TYPES = "monotributo_types",
     VAT_RANKING = "vat_ranking",
     SOCIAL_SECURITY = "social_security",
     SERVICE_TYPE = "service_type",
+    PRODUCT_PYME = "product_pymes"
 }
 
 export const Columns = {
@@ -212,5 +225,6 @@ export const Columns = {
     grossIncome: GrossIncome,
     serviceType: ServiceType,
     monotributoTypes: MonotributoTypes,
-    vatRanking: VatRanking
+    vatRanking: VatRanking,
+    productPyme: ProductPyme
 }

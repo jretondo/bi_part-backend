@@ -9,7 +9,8 @@
     "stop": "pm2 stop dist/api/ecosystem.config.js",
     "restart": "pm2 restart dist/api/ecosystem.config.js",
     "build": "tsc",
-    "purge": "rm -rf dist"
+    "purge": "rm -rf dist",
+     "dev": "nodemon"
   },
   "keywords": [
     "api",

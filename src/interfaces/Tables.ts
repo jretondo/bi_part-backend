@@ -80,28 +80,24 @@ export interface IOperativeClients {
     born_date: Date,
     client_type_id: number,
 
-    activity_description: string,
-    monotributo_type_id: number,
-    balance: boolean,
-    physical_person: boolean,
+    activity_description: string,  
+  
+    observations: string, 
 
-    social_security: number | null, //931
-    social_security_rank: number | null, //931    
-    gross_income_id: number,
-    vat_rank: number | null,
-
-    domestic_service: number | null,
-    service_type_id: number,
-
-    user_id: number, //user who created the client
+    product_pyme_id: number;
     team_id: number,
-    observations: string,
+    division_id: number;
 
-    client_check: boolean,
-    client_check_update: Date | null,
-    admin_check: number,
-    admin_check_update: Date | null,
-    verification_code: string,
+    balance: boolean,
+    balance_close: number, // --> month number
+    cupon: boolean  
+    invoice: boolean,
+    system: boolean,
+    sociality: boolean,
+    team_balance_id: number,
+    physical_person: boolean, // --> Anual
+    risk: boolean,
+    team_risk_id: number,
 }
 
 export interface IIvaConditions {
@@ -138,6 +134,12 @@ export interface IAfipCrt {
 }
 
 export interface ITeam {
+    id?: number,
+    name: string,
+    description: string
+}
+
+export interface IDivision {
     id?: number,
     name: string,
     description: string
@@ -189,4 +191,17 @@ export interface IClientType {
     id?: number,
     name: string,
     description: string
+}
+
+export interface IProductPyme{
+    id?: number,
+    name: string,
+    gross_income_id?: number,
+    monotributo_type_id?: number,   
+    service_type_id?: number,
+    social_security?: number,
+    domestic_service?: number,
+    operative_taxes_user_id: number,
+    operative_onboard_user_id: number,
+    operative_domestic_user_id: number,
 }

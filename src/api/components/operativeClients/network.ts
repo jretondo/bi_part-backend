@@ -71,18 +71,8 @@ const getTaxProof = (
     }).catch(next)
 }
 
-const aceptClient = (
-    req: Request,
-    res: Response,
-    next: NextFunction
-) => {
-    Controller.aceptClient(Number(req.params.idClient), String(req.params.verificationCode), res).then(response => {
-        success({ req, res, message: response })
-    }).catch(next)
-}
 //Routes
 router
-    .get("/aceptClient/:idClient/:verificationCode", aceptClient)
     .get("/dataTaxProof", secure(undefined, undefined, EModules.clients, 1), getTaxProof)
     .get("/dataTax", secure(undefined, undefined, EModules.clients, 1), getClientDataTax)
     .get("/:page", secure(undefined, undefined, EModules.clients, 1), list)

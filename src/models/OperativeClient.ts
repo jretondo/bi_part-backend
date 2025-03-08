@@ -5,10 +5,6 @@ import { DataTypes, Model, Optional } from 'sequelize';
 import sequelize from '../database';
 import IvaCondition from './IvaCondition';
 import CommercialClient from './CommercialClient';
-import Admin from './Admin';
-import GrossIncome from './GrossIncome';
-import MonotributoTypes from './MonotributoTypes';
-import ServiceType from './ServiceType';
 import Team from './Team';
 import ClientType from './ClientType';
 
@@ -78,44 +74,10 @@ OperativeClient.init({
         type: DataTypes.INTEGER,
         allowNull: true
     },
-    monotributo_type_id: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-        defaultValue: null
-    },
-    balance: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false
-    },
-    physical_person: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false
-    },
-    social_security: {
-        type: DataTypes.INTEGER,
-        allowNull: true
-    },
-    social_security_rank: {
-        type: DataTypes.INTEGER,
-        allowNull: true
-    },
-    gross_income_id: {
-        type: DataTypes.INTEGER,
-        allowNull: true
-    },
-    vat_rank: {
-        type: DataTypes.INTEGER,
-        allowNull: true
-    },
-    domestic_service: {
-        type: DataTypes.INTEGER,
-        allowNull: true
-    },
-    service_type_id: {
-        type: DataTypes.INTEGER,
-        allowNull: true
-    },
-    user_id: {
+   
+ 
+  
+    product_pyme_id: {
         type: DataTypes.INTEGER,
         allowNull: true
     },
@@ -123,32 +85,56 @@ OperativeClient.init({
         type: DataTypes.INTEGER,
         allowNull: true
     },
+   
+    division_id: {
+        type: DataTypes.INTEGER,
+        allowNull: true
+    },
+
     observations: {
         type: DataTypes.STRING(255),
         allowNull: false
-    },
-    client_check: {
+    },  
+    balance: {
         type: DataTypes.BOOLEAN,
-        allowNull: false,
-        defaultValue: false
+        allowNull: false
     },
-    client_check_update: {
-        type: DataTypes.DATE,
-        allowNull: true
-    },
-    admin_check: {
+    balance_close: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-        defaultValue: false
-    },
-    admin_check_update: {
-        type: DataTypes.DATE,
         allowNull: true
     },
-    verification_code: {
-        type: DataTypes.STRING(100),
+    cupon: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false
+    },
+    invoice: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false
+    },
+    system: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false
+    },
+    sociality: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false
+    },
+    team_balance_id: {
+        type: DataTypes.INTEGER,
         allowNull: true
-    }
+    },    
+    physical_person: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false
+    },
+    risk: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false
+    },
+    team_risk_id: {
+        type: DataTypes.INTEGER,
+        allowNull: true
+    },
 }, {
     sequelize,
     tableName: Tables.OPERATIVE_CLIENTS,
@@ -180,54 +166,6 @@ CommercialClient.hasMany(OperativeClient, {
 OperativeClient.belongsTo(CommercialClient, {
     foreignKey: Columns.operativeClients.commercial_client_id,
     targetKey: Columns.commercialClients.id
-})
-
-Admin.hasMany(OperativeClient, {
-    foreignKey: Columns.operativeClients.user_id,
-    sourceKey: Columns.operativeClients.id,
-    onDelete: Restrictions.CASCADE,
-    onUpdate: Restrictions.CASCADE
-})
-
-OperativeClient.belongsTo(Admin, {
-    foreignKey: Columns.operativeClients.user_id,
-    targetKey: Columns.operativeClients.id
-})
-
-GrossIncome.hasMany(OperativeClient, {
-    foreignKey: Columns.operativeClients.gross_income_id,
-    sourceKey: Columns.grossIncome.id,
-    onDelete: Restrictions.SET_NULL,
-    onUpdate: Restrictions.SET_NULL
-})
-
-OperativeClient.belongsTo(GrossIncome, {
-    foreignKey: Columns.operativeClients.gross_income_id,
-    targetKey: Columns.grossIncome.id
-})
-
-MonotributoTypes.hasMany(OperativeClient, {
-    foreignKey: Columns.operativeClients.monotributo_type_id,
-    sourceKey: Columns.monotributoTypes.id,
-    onDelete: Restrictions.SET_NULL,
-    onUpdate: Restrictions.SET_NULL
-})
-
-OperativeClient.belongsTo(MonotributoTypes, {
-    foreignKey: Columns.operativeClients.monotributo_type_id,
-    targetKey: Columns.monotributoTypes.id
-})
-
-ServiceType.hasMany(OperativeClient, {
-    foreignKey: Columns.operativeClients.service_type_id,
-    sourceKey: Columns.serviceType.id,
-    onDelete: Restrictions.SET_NULL,
-    onUpdate: Restrictions.SET_NULL
-})
-
-OperativeClient.belongsTo(ServiceType, {
-    foreignKey: Columns.operativeClients.service_type_id,
-    targetKey: Columns.serviceType.id
 })
 
 Team.hasMany(OperativeClient, {

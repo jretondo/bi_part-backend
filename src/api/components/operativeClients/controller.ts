@@ -21,18 +21,7 @@ import Names from '../../../data/Names.json';
 
 export = () => {
     const upsert = async (client: IOperativeClients) => {
-        if (client.id) {
-            const opClient = await Client.findOne({ where: { id: client.id } })
-            const userData = await Admin.findOne({ where: { id: client.user_id } })
-            const uniqueCode = (Math.floor(Math.random() * 1000000)).toString()
-
-            const link = `https://api-prod.nekoadmin.com.ar/bi-part/api/operativeClients/aceptClient/${client.id}/${uniqueCode}`
-
-            if (opClient?.dataValues.user_id !== client.user_id) {
-                await confirmClient(`${userData?.dataValues.name} ${userData?.dataValues.lastname}` || "", client.business_name || "", "jretondo90@gmail.com", "Confirmación de cliente", link)
-                client.verification_code = uniqueCode
-            }
-
+        if (client.id) {  
             return await Client.update(client, { where: { id: client.id } })
         } else {
             const newClientBody = {
@@ -44,37 +33,10 @@ export = () => {
                 verification_code: ""
             }
             console.log('newClientBody :>> ', newClientBody);
-            const newClient = await Client.create(newClientBody)
-            const userData = await Admin.findOne({ where: { id: client.user_id } })
-            if (client.user_id) {
-                const uniqueCode = (Math.floor(Math.random() * 1000000)).toString()
-                const link = `http://192.168.100.8:3021/api/operativeClients/aceptClient/${newClient.dataValues.id}/${uniqueCode}`
-                await confirmClient(`${userData?.dataValues.name} ${userData?.dataValues.lastname}` || "", client.business_name || "", "jretondo90@gmail.com", "Confirmación de cliente", link)
-                newClient.dataValues.verification_code = uniqueCode
-                return await Client.update(newClient.dataValues, { where: { id: newClient.dataValues.id } })
-            }
+            const newClient = await Client.create(newClientBody)   
             return newClient
         }
     }
-
-    const aceptClient = async (idClient: number, verificationCode: string, res: Response) => {
-        const opClient = await Client.findOne({ where: { id: idClient } })
-        if (opClient?.dataValues.verification_code === verificationCode) {
-            const userData = await Admin.findOne({ where: { id: opClient?.dataValues.user_id } })
-            await Client.update({ client_check: true, client_check_update: new Date() }, { where: { id: idClient } })
-            const data = {
-                Colors,
-                Links,
-                Names,
-                clientName: opClient?.dataValues.business_name || "",
-                userName: `${userData?.dataValues.name} ${userData?.dataValues.lastname}` || ""
-            };
-            res.render('emails/Templates/clientConfirmated.ejs', data);
-        } else {
-            res.send("El código de verificación no es correcto")
-        }
-    }
-
     const list = async (isAdmin: boolean, userId: number, page: number, text?: string) => {
         const ITEMS_PER_PAGE = 10;
 
@@ -182,6 +144,5 @@ export = () => {
         getClientDataTax,
         getTaxProof,
         allList,
-        aceptClient
     };
 }
