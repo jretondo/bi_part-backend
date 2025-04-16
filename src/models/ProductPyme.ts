@@ -1,11 +1,7 @@
 import { IProductPyme } from '../interfaces/Tables';
 import { DataTypes, Model, Optional } from 'sequelize';
 import sequelize from '../database';
-import { Columns, Tables } from '../constant/TABLES';
-import { Restrictions } from '../constant/OTHERS';
-import GrossIncome from './GrossIncome';
-import MonotributoTypes from './MonotributoTypes';
-import ServiceType from './ServiceType';
+import { Tables } from '../constant/TABLES';
 
 type ProductPymeCreationAttributes = Optional<IProductPyme, 'id'>;
 

@@ -9,7 +9,6 @@ import Team from './Team';
 import ClientType from './ClientType';
 import GrossIncome from './GrossIncome';
 import MonotributoTypes from './MonotributoTypes';
-import ServiceType from './ServiceType';
 
 type OperativeClientCreationAttributes = Optional<IOperativeClients, 'id'>;
 
@@ -148,10 +147,6 @@ OperativeClient.init(
       type: DataTypes.INTEGER,
       allowNull: true,
     },
-    service_type_id: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-    },
     social_security: {
       type: DataTypes.INTEGER,
       allowNull: true,
@@ -162,15 +157,15 @@ OperativeClient.init(
     },
     operative_taxes_user_id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     operative_domestic_user_id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     operative_onboard_user_id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
   },
   {
@@ -257,18 +252,6 @@ MonotributoTypes.hasMany(OperativeClient, {
 OperativeClient.belongsTo(MonotributoTypes, {
   foreignKey: Columns.productPyme.monotributo_type_id,
   targetKey: Columns.monotributoTypes.id,
-});
-
-ServiceType.hasMany(OperativeClient, {
-  foreignKey: Columns.productPyme.service_type_id,
-  sourceKey: Columns.serviceType.id,
-  onDelete: Restrictions.SET_NULL,
-  onUpdate: Restrictions.SET_NULL,
-});
-
-OperativeClient.belongsTo(ServiceType, {
-  foreignKey: Columns.productPyme.service_type_id,
-  targetKey: Columns.serviceType.id,
 });
 
 export = OperativeClient;

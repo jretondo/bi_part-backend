@@ -12,10 +12,6 @@ import { AfipClass } from '../../../utils/classes/AfipClass';
 import { base64Encode } from '../../../utils/functions/base64Encode';
 import moment from 'moment';
 import OperativeClient from '../../../models/OperativeClient';
-import Admin from '../../../models/Admin';
-import GrossIncome from '../../../models/GrossIncome';
-import MonotributoTypes from '../../../models/MonotributoTypes';
-import ServiceType from '../../../models/ServiceType';
 import Team from '../../../models/Team';
 import ClientType from '../../../models/ClientType';
 

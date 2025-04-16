@@ -101,7 +101,6 @@ export interface IOperativeClients {
 
   gross_income_id?: number;
   monotributo_type_id?: number;
-  service_type_id?: number;
   social_security?: number;
   domestic_service?: number;
   operative_taxes_user_id: number;
@@ -155,12 +154,6 @@ export interface IDivision {
 }
 
 export interface IGrossIncome {
-  id?: number;
-  name: string;
-  description: string;
-}
-
-export interface IServiceType {
   id?: number;
   name: string;
   description: string;
