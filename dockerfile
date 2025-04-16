@@ -1,15 +1,12 @@
-# Usar una imagen base oficial de Node.js
 FROM node:18-alpine
 
-# Establecer el directorio de trabajo
 WORKDIR /app
 
-# Copiar package.json y package-lock.json para instalar dependencias
 COPY package*.json ./
 COPY tsconfig.json ./
 
-# Instalar dependencias de la aplicación
-RUN apk update && apk add --no-cache nss \
+RUN apk update && apk add --no-cache \
+    nss \
     python3 \
     chromium \
     chromium-chromedriver \
@@ -23,16 +20,14 @@ RUN apk update && apk add --no-cache nss \
     wget
 
 RUN npm install -g typescript pm2
-
 RUN npm install
+
+COPY . .
 
 RUN npm run build
 
-COPY . .
-# Establecer Puppeteer para usar Chromium de la instalación del sistema
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
     PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser \
     TZ=America/Argentina/Buenos_Aires
-    
-# Comando por defecto para el contenedor
+
 CMD ["pm2-runtime", "start", "dist/api/ecosystem.config.js"]

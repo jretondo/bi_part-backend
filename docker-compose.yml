@@ -13,9 +13,7 @@ services:
       - ./views:/app/views
       - ./src:/app/src
       - ./tsconfig.json:/app/tsconfig.json
-      - ./:/app
-      - /app/node_modules
-      - ./public:/app/public
+      # Eliminar ./ y node_modules
     ports:
       - '3021:3021'
     env_file:
