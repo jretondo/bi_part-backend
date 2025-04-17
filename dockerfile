@@ -22,9 +22,9 @@ RUN apk update && apk add --no-cache \
 RUN npm install -g typescript pm2
 RUN npm install
 
-COPY . .
-
 RUN npm run build
+
+COPY . .
 
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
     PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser \
