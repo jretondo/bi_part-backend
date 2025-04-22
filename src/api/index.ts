@@ -8,7 +8,7 @@ import Admin from '../models/Admin';
 const handleConn = async () => {
   try {
     await sequelize.authenticate();
-    await sequelize.sync({ alter: true });
+    //await sequelize.sync({ alter: true });
     console.log(
       'Connection has been established successfully. DB: ' +
         config.mysql.database,
