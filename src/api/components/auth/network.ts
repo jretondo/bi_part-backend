@@ -10,6 +10,7 @@ const login = (req: Request, res: Response, next: NextFunction) => {
       success({ req, res, message: userData });
     })
     .catch((error) => {
+      console.error(error);
       if (error.name === 'SequelizeUniqueConstraintError') {
         error.status = 400;
       }
