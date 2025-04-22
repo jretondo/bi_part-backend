@@ -1,41 +1,37 @@
 # Usar una imagen base oficial de Node.js
-FROM node:18
+FROM node:18-alpine
 
-# Copiar el package.json y el package-lock.json (si existe)
+# Establecer el directorio de trabajo
+WORKDIR /app
+
+# Copiar package.json y package-lock.json para instalar dependencias
 COPY package*.json ./
-
-# Instalar las dependencias necesarias
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    python3 \
-    python3-pip \
-    chromium \
-    chromium-driver \
-    fontconfig \
-    libnss3 \
-    freetype2-demos \
-    libfreetype6 \
-    libharfbuzz-bin \
-    ca-certificates \
-    fonts-freefont-ttf \
-    git \
-    wget \
-&& rm -rf /var/lib/apt/lists/*
-
-# Instalar dependencias globales
-RUN npm install -g typescript nodemon pm2
+COPY tsconfig.json ./
 
 # Instalar dependencias de la aplicación
-RUN npm install
+RUN apk update && apk add --no-cache nss \
+    python3 \
+    chromium \
+    chromium-chromedriver \
+    fontconfig \
+    freetype \
+    harfbuzz \
+    ca-certificates \
+    ttf-freefont \
+    git \
+    tzdata \
+    wget
 
-RUN npm run build
+RUN npm install -g typescript pm2
+
+RUN npm install
 
 # Establecer Puppeteer para usar Chromium de la instalación del sistema
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
-    PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
-
+    PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser \
+    TZ=America/Argentina/Buenos_Aires
+    
 COPY . .
-
 
 # Comando de inicio
 CMD ["pm2-runtime", "start", "dist/api/ecosystem.config.js"]
